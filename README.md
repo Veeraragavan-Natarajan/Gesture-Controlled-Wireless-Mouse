@@ -1,55 +1,96 @@
 🖱️ Gesture-Controlled Wireless Mouse
 
-ESP32-C3 / ESP32 Dev Module + MPU6050
+ESP32 + MPU6050 | BLE HID | Calibrated Gesture Control
 
-This project aims to create a gesture-based wireless mouse that allows the user to control the cursor using hand movements.
-It uses the MPU6050 for motion sensing and the ESP32 (C3 or Dev Module) for processing and BLE HID communication. Two tactile switches handle left and right click actions.
+This project implements a gesture-controlled wireless mouse that allows cursor movement using natural hand tilts. It is built using an ESP32 and an MPU6050 IMU, with tactile switches for left and right click actions. The mouse communicates with the host system via Bluetooth Low Energy (BLE) HID.
 
-This repository will track the entire development process from circuit design to the final prototype.
+The project was developed through multiple stages — from breadboard prototyping to a finalized zero PCB build with manual soldering and calibrated motion control.
 
-🔧 Current Progress — Circuit Design Completed
+✨ Key Features
 
-For the initial stage, the circuit design has been completed.
-To keep the enclosure and internal layout flexible, two design variants were created:
+Gesture-based cursor control using MPU6050 IMU
 
-• ESP32-C3 Version
+BLE HID mouse implementation using ESP32
 
-Compact and efficient layout
+Left & right click using tactile switches
 
-I²C connection with MPU6050
+Motion calibration on startup
 
-Tactile switches for click inputs
+Dead-zone handling to eliminate jitter
 
-• ESP32 Dev Module Version
+Smooth cursor movement with low-pass filtering
 
-Classic ESP32 form factor
+Tuned sensitivity for natural DPI-like behavior (~800–1600 DPI feel)
 
-Same IMU + switch integration
+Compact zero PCB hardware with manual soldering
 
-Good for breadboard testing
+🧩 Hardware Used
 
-A short circuit design demo video is included in this repository.
+ESP32 Dev Module
 
-🧩 Components Used
+MPU6050 (Accelerometer + Gyroscope)
 
-ESP32-C3 Dev Board or *ESP32 Dev Module
+2 × Tactile switches (Left / Right click)
 
-MPU6050 IMU sensor
+Zero PCB
 
-2 × Tactile Switches (Left & Right Click)
+Jumper wires (for prototyping)
 
-Breadboard / jumper wires
+USB cable
 
-USB cable for programming
+🔌Schematics & Connections
 
-🎯 Next Steps
+The gesture-controlled mouse uses a simple and reliable hardware layout centered around the ESP32 Dev Module and MPU6050 IMU. The MPU6050 communicates with the ESP32 over the I²C interface, while tactile switches are used for mouse click inputs.
 
-Implement BLE HID mouse functionality
+📍 MPU6050 Connections
+MPU6050 Pin	ESP32 Pin	Description
+VCC	3.3V	Power supply
+GND	GND	Common ground
+SDA	GPIO 21	I²C data
+SCL	GPIO 22	I²C clock
+🖱️ Tactile Switch Connections
+Function	ESP32 Pin	Notes
+Left Click	GPIO 18	Uses internal pull-up
+Right Click	GPIO 19	Uses internal pull-up
+Other switch pin	GND	Active LOW
+⚠️ Design Notes
 
-Tune IMU gesture sensitivity & smoothing
+All components operate at 3.3V logic levels
 
-Add calibration for drift reduction
+Internal pull-up resistors are enabled for switch inputs
 
-Begin enclosure/casing design
+A common ground is maintained across all components
 
-Integrate full interaction flow
+The same pin mapping was used for both breadboard and zero PCB builds
+
+🧠 How It Works (Brief)
+
+MPU6050 measures pitch and roll angles
+
+Sensor data is filtered and smoothed in firmware
+
+Cursor movement is mapped from hand tilt
+
+BLE HID sends mouse movement and click events
+
+Calibration offsets ensure stable resting behavior
+
+🔧 Development Stages
+1️⃣ Breadboard Prototype
+
+Hardware validation
+
+BLE mouse testing
+
+Initial gesture mapping
+
+2️⃣ Zero PCB Final Build
+
+Manual soldering
+
+Compact layout
+
+Final pin mapping
+
+Full calibration & tuning
+
